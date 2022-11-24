@@ -18,7 +18,7 @@ blogPostRouter.get('/', async (req,res) => {
         const blogPosts = await BlogPost.findAll();
         res.json(blogPosts);
     } catch (error) {
-        res.sendStatus(500).send(error);//server error
+        res.status(500).send(error);//server error
     }
 })
 
@@ -29,7 +29,7 @@ blogPostRouter.get('/:blogPostId', async (req,res) => {
         if(blogPosts) res.json(blogPosts);
         else res.sendStatus(404);
     } catch (error) {
-        res.sendStatus(500).send(error);//server error
+        res.status(500).send(error);//server error
     }
 })
 
