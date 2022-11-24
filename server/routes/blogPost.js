@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const {body, param, validationResult} = require('express-validator');
-const {BlogPost} = require('../models/index.js');
+const BlogPost = require('../models/index.js');
 
 const blogPostRouter = Router();
 
@@ -51,7 +51,7 @@ blogPostRouter.put('/:blogPostId', async (req, res) => {
 // POST - Create a single post - return created post
 blogPostRouter.post('/', async (req, res) => {
     try {
-        const newPost = BlogPost.create({author : req.body.author, title: req.body.title, content: req.body.content, category: req.body.category});
+        const newPost = await BlogPost.create({author : req.body.author, title: req.body.title, content: req.body.content, category: req.body.category});
         res.json(newPost); //200 - OK sent automatically
     } catch (error) {
         res.status(500).send(error); //Internal server error
@@ -62,7 +62,7 @@ blogPostRouter.post('/', async (req, res) => {
 // DELETE - Delete a single post - return number of posts deleted (1 or  hopefully)
 blogPostRouter.delete('/:blogPostId', async (req, res) => {
     try {
-        const deletedPost = await deletedPost.destroy({where: {id: req.params.blogPostId}});
+        const deletedPost = await BlogPost.destroy({where: {id: req.params.blogPostId}});
         if(deletedPost) res.json(deletedPost); //200 - OK sent automatically
         else res.status(404).json(deletedPost); //Return 0, and status 404 - not found
     } catch (error) {
