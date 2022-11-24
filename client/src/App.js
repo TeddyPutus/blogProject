@@ -60,7 +60,7 @@ async function sendBlogPost() {
   try {
        // WORKING WITH OUR OWN REST API - USING OUR LOCALHOST
     // {} ALLOWS YOU TO SEND ADDITIONAL INFORMATION 
-    const response = await fetch("http://localhost:4000", {
+    const response = await fetch("http://localhost:5001", {
       method: "POST", 
       // TELLS OUR SERVER HOW THE API HANDLES DATA - which is JSON 
       headers: {"Content-Type": "application/json"}, 
