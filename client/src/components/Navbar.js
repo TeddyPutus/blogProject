@@ -11,6 +11,8 @@ export default function Navbar() {
       <NavButton>Trending</NavButton>
       <NavButton>What's Hot</NavButton>
       <NavButton>About</NavButton>
+      <NavButton>Send Feedback</NavButton>
+
 
 
     </nav>

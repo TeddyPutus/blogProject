@@ -56,7 +56,9 @@ header {
   align-items: flex-start;
 
 }
-.info{
+
+/* OLD STYLYING FOR COMPONENTS  */
+/* .info{
   display: grid; 
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows:auto ;
@@ -65,12 +67,28 @@ header {
   background-color: cadetblue;
   padding: 15px; 
   margin: 15px;
-}
+} */
 
 .read-more-button{
   padding:5px; 
   font-size: 12px;
   margin: 10px;
+}
+
+.creatingBlogPost {
+  background-color: beige;
+}
+
+.displayingBlogPosts{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.individualPost{
+  background-color: cadetblue;
+  padding: 15px; 
+  margin: 10px; 
 }
 
 

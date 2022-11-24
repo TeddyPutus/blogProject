@@ -8,6 +8,7 @@ import {useState, useEffect} from 'react'
 import Header from './components/Header'
 // import Navbar from './components/Navbar';
 import Footer from "./components/Footer"
+import Post from "./components/Post"
 
 
 
@@ -22,45 +23,41 @@ function App() {
   // SETTING THE OUTPUT FROM WHAT IS ENTERED 
   const [output, setOutput] = useState()
 
-  // MAKING THE BLOG POSTS COLLAPSIBLE
-  const [readMore,setReadMore]=useState(false);
-  const buttonName = readMore ? 'Read Less << ':'Read More >> '
 
-//   const [error, setError] = useState(null)
-//   const [posts, setPosts] = useState([])
-//   const [newPost, setNewPost] = useState({
-  
-//     blogPost: "",
-//     author: ""
-// })
 
-//WILL DISPLAY THE DATA RECIEVED FROM BACKEND 
-function displayBlogPosts () {
-  return (
-    <div className="allPosts">
-      
-    </div>
-  )
-}
+  const [blogs, setBlogs] = useState([])
+  const [error, setError] = useState(null)
 
-// Use effect function for stuff to happen immediately on page render
-// useEffect(() => {
-//   fetch("http://localhost:5001/blogPost/")
-//     .then((res) => res.json())
-//     .then((res) => {
-//     setPosts(res.posts)
-//     },
-//       (error) => {
-//         setError(error)
-//       }
-//     )
-// },[])
+  // useEffect(() => {
+  //   fetch('http://localhost:5001/blogPosts')
+  //   .then(res => res.json())
+  //   .then(res => {
+  //     setBlogs(res.blog)
+  //   },
+  //   error => {
+  //     setError(error)
+  //   })
+  // )}, 
 
+  // [])
+
+
+  const [posts, setPosts] = useState([])
+
+  const [newPost, setNewPost] = useState({
+    author: "",
+    title: "",
+    content: "",
+    category: ""
+})
+
+
+//PUT - CREATING A BLOG POST 
 async function sendBlogPost() {
   try {
        // WORKING WITH OUR OWN REST API - USING OUR LOCALHOST
     // {} ALLOWS YOU TO SEND ADDITIONAL INFORMATION 
-    const response = await fetch("http://localhost:5001", {
+    const response = await fetch("http://localhost:5001/blogPosts/", {
       method: "POST", 
       // TELLS OUR SERVER HOW THE API HANDLES DATA - which is JSON 
       headers: {"Content-Type": "application/json"}, 
@@ -74,18 +71,29 @@ async function sendBlogPost() {
     })
     const data = await response.json();
     console.log(data)
-    setOutput(data.msg);
+    setOutput(`Thank you ${data.author} for posting your blog with title ${data.title}`);
   } catch (error) {
     console.log(error)
     
   }
 }
 
-// ARRAY OF OBJECTS - TBD
-const arr = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."]
+//GETTING ALL POSTS FROM DB-button
+async function getPosts() {
+  try {
+    const response = await fetch("http://localhost:5001/blogPosts/")
+
+    // data=array of objects
+    const data = await response.json()
+  
+    setPosts(data)
+  
+  
+  } catch (error) {
+    console.log(error)
+    
+  }
+}
 
   return (
     <div className="App">
@@ -95,20 +103,7 @@ const arr = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
       </header>
       
       <main>
-        <hr/>
-        <div className="info">
-            {arr.map((item, index) => {
-                return (
-                  <div className="individual">
-                    <h2>{item}here</h2>
-                    {/* <button>See more</button> */}
-                    <button className="read-more-button" onClick={()=>{setReadMore(!readMore)}}><h2>{buttonName}</h2></button>
-                    {/* {readMore && extraContent} */}
-                  </div>
-                )
-            })}
-        </div>
-
+    
         <hr />
         <div className="creatingBlogPost">
           <h2>Creating Blog Post</h2>
@@ -118,11 +113,23 @@ const arr = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
             <input onChange={(event) => setCategory(event.target.value)} placeholder="Category"/>
 
             <p>{output}</p>
+
             <button onClick={sendBlogPost}>Post!</button> <br/> <br />
-
-
+            
+            <button onClick={getPosts}>Get posts!</button>
         </div>
         <hr />
+
+        <div className="displayingBlogPosts">
+            {posts.map((data, key) => (
+              <div className="individualPost">
+                {/* THIS COMPONENT WILL DISPLAY ALL THE DATA AND A BUTTON FOR COLLAPSING THE CONTENT */}
+                <Post author={data.author} title={data.title} content={data.content} category={data.category} key={key} />
+               
+            </div>
+          ))}
+      
+        </div>
        
         
       </main>
