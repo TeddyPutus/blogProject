@@ -52,6 +52,7 @@ blogPostRouter.put('/:blogPostId', async (req, res) => {
 blogPostRouter.post('/', async (req, res) => {
     try {
         const newPost = await BlogPost.create({author : req.body.author, title: req.body.title, content: req.body.content, category: req.body.category});
+        console.log("hello im in the post")
         res.json(newPost); //200 - OK sent automatically
     } catch (error) {
         res.status(500).send(error); //Internal server error

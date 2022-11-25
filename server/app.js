@@ -16,9 +16,9 @@ app.use(cors()); //This allows post requests etc.
 app.use('/blogPosts', blogPostRouter);
 
 //Comment out app.listen when running a supertest file
-// app.listen(5001, async() => {
-//     await seed();
-//     console.log('Listening on port 5001');
-// });
+app.listen(5001, async() => {
+    // await seed();
+    console.log('Listening on port 5001');
+});
 
 module.exports = app;
