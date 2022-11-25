@@ -16,7 +16,7 @@ export const HeaderOne = styled.h1`
     
 `
 
-export const NavBar = styled.nav`
+// export const NavBar = styled.nav`
   /* padding-left: 2000px; */
   /* background-color: goldenrod; */
   /* display: flex;
@@ -24,22 +24,32 @@ export const NavBar = styled.nav`
   align-content: flex-end;
   text-align: center; */
 
+// `
+
+export const But = styled.button`
+    display: flex;
+    flex-direction: column;
+
 `
 
 export const NavButton = styled.button`
+    /* display: flex;
+    flex-direction: column; */
     background-color: gold;
     padding: 15px; 
-    margin-left: 850px;
+    /* margin-left: 850px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 10px; */
     font-family:Arial, Helvetica, sans-serif ;
     font-size: 20px;
     font-weight: bold;
     font-style: italic;
     color: darkblue;
     width: fit-content;
-    width: 210px;
-    
+    /* width: 210px; */
+
+    height: auto; 
+
 `
 
 export const SubHeading = styled.h3`
@@ -47,6 +57,7 @@ export const SubHeading = styled.h3`
     font-size: 2vw;
     /* text-align: left;  */
     color: green;
+    font-family: "Oswald";
     /* display: inline; */
     
 

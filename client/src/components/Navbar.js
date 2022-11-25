@@ -5,13 +5,16 @@ import '../App.css'
 import { AwesomeButton } from 'react-awesome-button';
 import 'react-awesome-button/dist/styles.css';
 
-export default function Navbar() {
+
+export default function Navbar(props) {
+    
   return (
     <nav className="navbar">
-      <NavButton className="glow-on-hover">Log In</NavButton>
-      {/* <NavButton>View All Posts</NavButton> */}
-       <AwesomeButton className="nav-button" type="primary" >View All Posts</AwesomeButton>
-      <NavButton>Create New Post</NavButton>
+      <NavButton className="glow-on-hover">Log In</NavButton> <br />
+      <NavButton>View All Posts</NavButton> <br /> <br />
+       {/* <AwesomeButton className="nav-button" type="primary" >View All Posts</AwesomeButton> <br /> <br /> <br /> */}
+       {/* <AwesomeButton id="create-post" className="nav-button" type="primary" onClick={() => {props.setHidden(!props.state)}}>Create New Post</AwesomeButton> */}
+      <NavButton onClick={() => {props.setHidden(!props.state)}}>Create New Post</NavButton>
     </nav>
   )
 }
