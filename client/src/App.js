@@ -21,6 +21,7 @@ function App() {
   const [title, setTitle] = useState()
   const [content, setContent] = useState()
   const [category, setCategory] = useState()
+  const [changedData, setChangedData] = useState(true)
 
   // SETTING THE OUTPUT FROM WHAT IS ENTERED 
   const [output, setOutput] = useState()
@@ -84,24 +85,24 @@ async function sendBlogPost() {
 }
 
 // DELETING A POST 
-const [postTitle, deletePost] = useState()
+// const [postTitle, deletePost] = useState()
 
-async function deleteBlogPost() {
-  try {
-    const response = await fetch("http://localhost:5001/:blogPostId", {
-      method: "DELETE", 
-      headers: {"Content-Type": "application/json"}, 
-      body: JSON.stringify({
-       title: postTitle
-      })
-    })
+// async function deleteBlogPost() {
+//   try {
+//     const response = await fetch("http://localhost:5001/:blogPostId", {
+//       method: "DELETE", 
+//       headers: {"Content-Type": "application/json"}, 
+//       body: JSON.stringify({
+//        title: postTitle
+//       })
+//     })
 
-    const data = await response.json();
-    setOutput(data.msg);
-  } catch (error) {
-    console.log(error)
-  }
-}
+//     const data = await response.json();
+//     setOutput(data.msg);
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 //GETTING ALL POSTS FROM DB-button
 async function getPosts() {
@@ -123,7 +124,7 @@ async function getPosts() {
 // USE EFFECT FOR GET POSTS 
 useEffect(() => {
    getPosts()
-}, []) 
+}, [changedData]) 
 
   return (
     <div className="App">
@@ -159,7 +160,7 @@ useEffect(() => {
             {posts.map((data, key) => (
               <div className="individualPost">
                 {/* THIS COMPONENT WILL DISPLAY ALL THE DATA AND A BUTTON FOR COLLAPSING THE CONTENT */}
-                <Post author={data.author} title={data.title} content={data.content} category={data.category} key={key} />
+                <Post author={data.author} title={data.title} content={data.content} category={data.category} updateAllPosts = {setChangedData}id ={data.id} key={key} />
                
             </div>
           ))}
