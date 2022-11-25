@@ -17,7 +17,7 @@ app.use('/blogPosts', blogPostRouter);
 
 //Comment out app.listen when running a supertest file
 app.listen(5001, async() => {
-    // await seed();
+    await seed();
     console.log('Listening on port 5001');
 });
 

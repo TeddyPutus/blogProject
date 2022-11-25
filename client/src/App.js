@@ -1,7 +1,9 @@
 // IMPORTING CSS FILE 
 import './App.css';
+// import "./logo.svg"
 
 // IMPORTING REACT METHODS
+// use ref was a wat to emulate event listeners
 import {useRef,useState, useEffect} from 'react'
 
 //IMPORTING COMPONENTS 
@@ -138,9 +140,7 @@ useEffect(() => {
 }, [changedData]) 
   
 
-  
-  
-  
+
   // const creatingBlogPost = document.querySelector("creatingBlogPost")
   // const createBlogButton = document.getElementById("create-post")
 
@@ -167,10 +167,13 @@ useEffect(() => {
   //   </div>
   // )
 
-  
-  
-  
-  
+  const [searchBarContent, setSearchBarContent] = useState("");
+  async function searchPosts(){
+    let response = await fetch(`http://localhost:5001/blogPosts/search/${searchBarContent}`);
+    let data = await response.json();
+    setSearchBarContent("");
+    setPosts(data);
+  }
   
   
   const [hidden, setHidden] = useState(false)
@@ -187,21 +190,23 @@ useEffect(() => {
       </header>
       
       <main>
-    
+        <h2 className="searchTitle">Search your posts:</h2>
+        <input className="searchbar "type="text" placeholder="Search" onChange={(event) => setSearchBarContent(event.target.value)}></input> 
+        <button className="searchButton" onClick={searchPosts} id="search-btn">🔍</button>
       
         <div className={hidden ? "creatingBlogPost" : "hidden"}>
-          <h2>Creating Blog Post</h2>
+          <h2 className="createBlogPostTitle"> ☺︎ Create your Blog Post! ☺︎</h2>
           
-            <input onChange={(event) => setAuthor(event.target.value)} placeholder="What's your name?"/> <br /> <br />
-            <input onChange={(event) => setTitle(event.target.value)} placeholder="Enter your post title"/> <br /> <br />
-            <input onChange={(event) => setContent(event.target.value)} placeholder="Enter your post here"/> <br /> <br />
+            <input className="input" onChange={(event) => setAuthor(event.target.value)} placeholder="What's your name?"/> <br /> <br />
+            <input className="input" onChange={(event) => setTitle(event.target.value)} placeholder="Enter your post title"/> <br /> <br />
+            <input className="input" onChange={(event) => setContent(event.target.value)} placeholder="Enter your post here"/> <br /> <br />
             {/* Selecti option drop down here */}
             {/* <input onChange={(event) => setCategory(event.target.value)} placeholder="Category" /> */}
 
 
-            <select name="genres" id="genres"  onChange={(event) => {setCategory(event.target.value); console.log(event.target.value)}}>
+            <select className="category-dropdown" name="genres" id="genres"  onChange={(event) => {setCategory(event.target.value); console.log(event.target.value)}}>
              
-              <option>Blog Genre</option>
+              <option>Category</option>
               <option value="Lifestyle">Lifestyle</option>
               <option value="Music">Music</option>
               <option value="Book">Books</option>
@@ -215,15 +220,15 @@ useEffect(() => {
 
             <p>{output}</p>
 
-            <button onClick={sendBlogPost}>Post!</button> <br/> <br />
+            <button className="postButton" onClick={sendBlogPost}>Post!</button> <br/> <br />
             {/* <button onClick={deleteBlogPost}>Delete Post!</button> <br /> <br /> */}
             
             {/* <button onClick={getPosts}>Get posts!</button> */}
             {/* {getPosts()} */}
         </div>
        
-        
-        <SubHeading>Your Blog Posts</SubHeading>
+        {/* DISPLAYING BLOG POSTS */}
+        <SubHeading>Your Blog Posts:</SubHeading>
         <div className="displayingBlogPosts">
          
             {posts.map((data, key) => (
