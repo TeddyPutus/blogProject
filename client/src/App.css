@@ -184,6 +184,10 @@ h1:hover { text-shadow: 0 0 20px rgb(173, 219, 173); }
   border-radius: 5px;
 }
 
+.blogImage {
+  border-radius: 20px;
+}
+
 /* nav {
   background-color: #709FB0;
 } */

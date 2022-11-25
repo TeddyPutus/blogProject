@@ -1,4 +1,4 @@
-import {useState} from'react'
+import {useState, useEffect} from'react'
 import '../App.css'
 
 import { AwesomeButton } from 'react-awesome-button';
@@ -13,6 +13,7 @@ export default function Post (props) {
 
     //state for changing the length of the blog post content 
     const [content, setContent] = useState()
+    const [randomImage, setRandomImage] = useState('')
 
     async function deleteBlogPost() {
         try {
@@ -27,9 +28,32 @@ export default function Post (props) {
         }
       }
 
+      const displayImage = () =>{
+      
+      
+        const createRandomImg = Math.floor(Math.random() * 300)
+        const image = `https://picsum.photos/id/${createRandomImg}/440/380/`
+        
+        let Images = []
+        for(let pic = 0; pic < 100; pic++) {
+          Images.push(image)
+        }
+        
+        const fetchRandomImg= Math.floor(Math.random() * Math.floor(100));
+      
+        return Images[fetchRandomImg];
+      
+      }
+      
+      useEffect(() => {
+        setRandomImage(displayImage)
+      
+      })
+
 
     return (
         <div className="post">
+          <img class = 'blogImage'src = {displayImage()} />
             <h2>{props.title}</h2>
              <h3>{props.author}</h3>
         {/* ternary operator for choosing the length of blog post  */}
