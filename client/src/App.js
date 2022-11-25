@@ -10,7 +10,9 @@ import Header from './components/Header'
 import Footer from "./components/Footer"
 import Post from "./components/Post"
 
-
+// IMPORTING BUTTON PACKAGES 
+import { AwesomeButton } from 'react-awesome-button';
+import 'react-awesome-button/dist/styles.css';
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
 
   const [blogs, setBlogs] = useState([])
   const [error, setError] = useState(null)
+
+
 
   // useEffect(() => {
   //   fetch('http://localhost:5001/blogPosts')
@@ -72,9 +76,30 @@ async function sendBlogPost() {
     const data = await response.json();
     console.log(data)
     setOutput(`Thank you ${data.author} for posting your blog with title ${data.title}`);
+    getPosts()
   } catch (error) {
     console.log(error)
     
+  }
+}
+
+// DELETING A POST 
+const [postTitle, deletePost] = useState()
+
+async function deleteBlogPost() {
+  try {
+    const response = await fetch("http://localhost:5001/:blogPostId", {
+      method: "DELETE", 
+      headers: {"Content-Type": "application/json"}, 
+      body: JSON.stringify({
+       title: postTitle
+      })
+    })
+
+    const data = await response.json();
+    setOutput(data.msg);
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -95,30 +120,40 @@ async function getPosts() {
   }
 }
 
+// USE EFFECT FOR GET POSTS 
+useEffect(() => {
+   getPosts()
+}, []) 
+
   return (
     <div className="App">
       <header>
+        <div className="titleHeader">
         <Header />
-        <hr/>
+        </div>
+        
+        
       </header>
       
       <main>
     
-        <hr />
+        
         <div className="creatingBlogPost">
           <h2>Creating Blog Post</h2>
-            <input onChange={(event) => setAuthor(event.target.value)} placeholder="What's your name?"/> <br />
-            <input onChange={(event) => setTitle(event.target.value)} placeholder="Enter your post title"/> <br />
-            <input onChange={(event) => setContent(event.target.value)} placeholder="Enter your post here"/> <br />
+            <input onChange={(event) => setAuthor(event.target.value)} placeholder="What's your name?"/> <br /> <br />
+            <input onChange={(event) => setTitle(event.target.value)} placeholder="Enter your post title"/> <br /> <br />
+            <input onChange={(event) => setContent(event.target.value)} placeholder="Enter your post here"/> <br /> <br />
             <input onChange={(event) => setCategory(event.target.value)} placeholder="Category"/>
 
             <p>{output}</p>
 
             <button onClick={sendBlogPost}>Post!</button> <br/> <br />
+            {/* <button onClick={deleteBlogPost}>Delete Post!</button> <br /> <br /> */}
             
-            <button onClick={getPosts}>Get posts!</button>
+            {/* <button onClick={getPosts}>Get posts!</button> */}
+            {/* {getPosts()} */}
         </div>
-        <hr />
+        
 
         <div className="displayingBlogPosts">
             {posts.map((data, key) => (

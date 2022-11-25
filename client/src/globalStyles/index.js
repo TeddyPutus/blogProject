@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import "../App.css"
 // STYLED COMPONENTS 
 //COMPONENTS NEED TO START WITH A CAPITAL LETTER
 
@@ -6,9 +7,12 @@ import styled from 'styled-components'
 export const HeaderOne = styled.h1`
     display: block;
     text-align: left;
-    font-size: 9vw;
-    color: red;
-    margin: 0;
+    font-size: 5vw;
+    color: #413C69;
+    margin: 10px;
+    font-family: "Playfair Display";
+
+    transition: 1s;
     
 `
 
@@ -39,11 +43,11 @@ export const NavButton = styled.button`
 `
 
 export const SubHeading = styled.h3`
-    display: inline-block;
-    font-size: 5vw;
-    text-align: left; 
+    /* display: inline-block; */
+    font-size: 2vw;
+    /* text-align: left;  */
     color: green;
-    display: block;
+    /* display: inline; */
     
 
 `

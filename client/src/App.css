@@ -1,6 +1,21 @@
 .App {
   text-align: center;
+  background-color: #C4D7E0;
+
+  /* TO MAKE THE FOOTER STICKY */
+  height: 100vh;
+  display: flex; 
+  flex-direction: column;
+  /* 1st part --> start, last part --> end and everythin inbetween spaced evenly */
+  /* putting header to very top and footer to very bottom, causing the space */
+  justify-content:space-between;
+  align-items: center;
 }
+
+body {
+  background-color: #C4D7E0;
+}
+
 
 .App-logo {
   height: 40vmin;
@@ -39,6 +54,11 @@
 
 /* STYLING */
 
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display&display=swap");
+selector{
+font-family: 'Playfair Display', sans-serif;
+}
+
 /* NAV BAR */
 /* Places navbar on right side of web page */
 body {
@@ -54,8 +74,22 @@ body {
 header {
   display: flex; 
   align-items: flex-start;
+  background-image: 'https://images.unsplash.com/photo-1500989145603-8e7ef71d639e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2376&q=80';
 
 }
+
+.titleHeader {
+  display: flex; 
+  align-items: flex-start;
+}
+
+.titleHeader:hover h1{
+  color:#809A6F ;
+  transform: translateX(150%)
+}
+
+/* GLOW ON HOVER */
+h1:hover { text-shadow: 0 0 20px rgb(173, 219, 173); }
 
 /* OLD STYLYING FOR COMPONENTS  */
 /* .info{
@@ -73,10 +107,26 @@ header {
   padding:5px; 
   font-size: 12px;
   margin: 10px;
+  color: green;
 }
 
+/* @keyframes mymove {
+  from {left: 0px;}
+  to {left: 200px;}
+  to {right: 0px;}
+} */
+
 .creatingBlogPost {
-  background-color: beige;
+  background-color: #B2C8DF;
+  color: #6E85B7;
+  width: fit-content;
+  margin-left: 550px;
+  padding: 15px;
+  border-radius: 10px;
+
+  /* position: relative; */
+  /* animation: mymove 5s infinite; */
+
 }
 
 .displayingBlogPosts{
@@ -86,9 +136,100 @@ header {
 }
 
 .individualPost{
-  background-color: cadetblue;
+  /* background-color: cadetblue; */
+  background-color: #94B49F;
   padding: 15px; 
   margin: 10px; 
+  border-radius: 5px;
 }
 
+/* nav {
+  background-color: #709FB0;
+} */
 
+/* NAV BUTTONS  */
+/* GLOWING LOG IN BUTTONS */
+.glow-on-hover {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: black;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
+/* SECOND NAV BUTTON ADDITIONAL STYLING */
+.nav-button{
+ 
+  margin-left: 850px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+ 
+  /* width: fit-content;
+  width: 210px; */
+}
+
+/* STYLING FOOTER */
+footer {
+ 
+  background-color: #709FB0;
+  color: white;
+  text-align: center;
+  padding: 10px; 
+  margin:0;
+  position: sticky;
+  bottom: 0;
+  width: 100vw;
+  font-weight: bold;
+}

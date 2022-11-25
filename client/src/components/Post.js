@@ -1,5 +1,9 @@
 import {useState} from'react'
 import '../App.css'
+
+import { AwesomeButton } from 'react-awesome-button';
+import 'react-awesome-button/dist/styles.css';
+
 export default function Post (props) {
 
     //State for checking whether post is folded or not (so it has a boolean)
@@ -21,6 +25,7 @@ export default function Post (props) {
              <p>Category: {props.category}</p>
              {/* the button  */}
              <button className="read-more-button" onClick={()=>{setReadMore(!readMore)}}><h2>{buttonName}</h2></button>
+             {/* <AwesomeButton type="secondary" className="read-more-button" onClick={()=>{setReadMore(!readMore)}}><h2>{buttonName}</h2></AwesomeButton> */}
         </div>
    
     )
