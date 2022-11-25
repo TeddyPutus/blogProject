@@ -4,6 +4,8 @@ const BlogPost = require('../models/index.js');
 // const isBodyEmpty = require('../middleware/isBodyEmpty')
 // const areFieldsEmpty = require('../middleware/areFieldsEmpty')
 
+const { Op } = require('sequelize');
+
 const blogPostRouter = Router();
 
 /**
@@ -121,6 +123,23 @@ blogPostRouter.delete('/:blogPostId', async (req, res) => {
         else res.status(404).json(deletedPost); //Return 0, and status 404 - not found
     } catch (error) {
         res.status(500).send(error); //Internal server error
+    }
+})
+
+//FILTERING FUNCTION - SEARCHING DATABASE 
+blogPostRouter.get('/search/:query', async (req,res) => {
+    try {
+        let allPosts = await BlogPost.findAll({where: {[Op.or] : [
+            {author: {[Op.substring] : `%${req.params.query}%`}}, //iLike could make this search case insensitive but it only works with postgres
+            {content: {[Op.substring] : `%${req.params.query}%`}},
+            {title: {[Op.substring] : `%${req.params.query}%`}},
+            {category : {[Op.substring] : `%${req.params.query}%`}}
+        ]}}
+        );
+        res.json(allPosts);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
     }
 })
 
