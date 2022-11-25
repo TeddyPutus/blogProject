@@ -1,5 +1,6 @@
 // IMPORTING CSS FILE 
 import './App.css';
+// import "./logo.svg"
 
 // IMPORTING REACT METHODS
 // use ref was a wat to emulate event listeners
@@ -166,10 +167,13 @@ useEffect(() => {
   //   </div>
   // )
 
-  
-  
-  
-  
+  const [searchBarContent, setSearchBarContent] = useState("");
+  async function searchPosts(){
+    let response = await fetch(`http://localhost:5001/blogPosts/search/${searchBarContent}`);
+    let data = await response.json();
+    setSearchBarContent("");
+    setPosts(data);
+  }
   
   
   const [hidden, setHidden] = useState(false)
@@ -186,7 +190,9 @@ useEffect(() => {
       </header>
       
       <main>
-    
+        <h2 className="searchTitle">Search your posts:</h2>
+        <input className="searchbar "type="text" placeholder="Search" onChange={(event) => setSearchBarContent(event.target.value)}></input> 
+        <button className="searchButton" onClick={searchPosts} id="search-btn">🔍</button>
       
         <div className={hidden ? "creatingBlogPost" : "hidden"}>
           <h2 className="createBlogPostTitle"> ☺︎ Create your Blog Post! ☺︎</h2>
@@ -222,7 +228,7 @@ useEffect(() => {
         </div>
        
         {/* DISPLAYING BLOG POSTS */}
-        <SubHeading>Your Blog Posts</SubHeading>
+        <SubHeading>Your Blog Posts:</SubHeading>
         <div className="displayingBlogPosts">
          
             {posts.map((data, key) => (

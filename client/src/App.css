@@ -75,7 +75,7 @@ font-family: 'Oswald', sans-serif;
 
 .navbar{
   display: grid; 
-  grid-template-rows:1fr 1fr 1fr ;
+  grid-template-rows:1fr 1fr ;
   column-width: 5px;
   margin-left: 900px;
   padding: 30px;
@@ -133,6 +133,23 @@ h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
   to {left: 200px;}
   to {right: 0px;}
 } */
+
+.searchTitle{
+  font-family: "Oswald"; 
+  font-size: 35px;
+  color: green;
+
+}
+
+.searchbar{
+  font-size: 20px;
+}
+
+.searchButton{
+  font-size: 15px;
+  margin-left: 10px;
+  background-color: white;
+}
 
 
 .creatingBlogPost {
@@ -198,6 +215,8 @@ h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
   border-color: green;
   padding: 5px;
   color: green;
+  height: 3.5vw;
+  font-weight: bold;
 
 }
 
@@ -225,7 +244,8 @@ h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
   padding: 15px; 
   margin: 10px; 
   border-radius: 5px;
-  width: 300px;
+  /* font-family: "Playfair Display"; */
+  /* width: 300px; */
 
 
 }

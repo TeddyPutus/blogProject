@@ -38,9 +38,9 @@ export default function Post (props) {
              <p>{readMore ? props.content : `${props.content.substring(0, 12)}...`}</p>
              <p>Category: {props.category}</p>
              {/* the button  */}
-             <button className="read-more-button" onClick={()=>{setReadMore(!readMore)}}><h2>{buttonName}</h2></button> <br />
+             <button className="read-more-button" onClick={()=>{setReadMore(!readMore)}}><h2>{buttonName}</h2></button> 
              {/* <AwesomeButton type="secondary" className="read-more-button" onClick={()=>{setReadMore(!readMore)}}><h2>{buttonName}</h2></AwesomeButton> */}
-             <button onClick = {deleteBlogPost} class = 'deleteButton'>Delete Post</button>
+             <button onClick = {deleteBlogPost} class = 'deleteButton'>Delete Post 🗑</button>
         </div>
    
     )
