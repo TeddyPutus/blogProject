@@ -21,6 +21,19 @@ BlogPost.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  likecount:{
+    type: DataTypes.INTEGER,
+    allowNull: true
+  }
+  // have it as boolean or string ???
+  // private:{
+  //   type:DataTypes.BOOLEAN
+  // },
+  // public:{
+  //   type:DataTypes.BOOLEAN
+  // }
+  
+
 }, {sequelize: db})
 
 

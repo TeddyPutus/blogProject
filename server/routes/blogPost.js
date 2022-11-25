@@ -1,6 +1,8 @@
 const { Router } = require("express");
-const {body, param, validationResult} = require('express-validator');
+const {body, checkBody, param, validationResult} = require('express-validator');
 const BlogPost = require('../models/index.js');
+// const isBodyEmpty = require('../middleware/isBodyEmpty')
+// const areFieldsEmpty = require('../middleware/areFieldsEmpty')
 
 const blogPostRouter = Router();
 
@@ -34,35 +36,87 @@ blogPostRouter.get('/:blogPostId', async (req,res) => {
 })
 
 // PUT -  Update a single post - return updated post
-blogPostRouter.put('/:blogPostId', async (req, res) => {
-    try {
-        const blogPost = await BlogPost.findOne({where: {id: req.params.blogPostId}});
-        if(blogPost){
-            await blogPost.update({author : req.body.author, title: req.body.title, content: req.body.content, category: req.body.category})
-            res.json(blogPost); //200 - OK sent automatically
-        }else{
-            res.sendStatus(404); //Not found
-        }        
-    } catch (error) {
-        res.status(500).send(error); //Internal server error
+blogPostRouter.put(
+    '/:blogPostId', 
+
+    //validates whether route parameter is numeric
+    param('blogPostId').isNumeric().withMessage('Id is not Numeric'),
+    
+    async (req, res) => {
+    //Handling errors if validation didnt pass
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).send(errors);
     }
+
+    const blogPost = await BlogPost.findOne({where: {id: req.params.blogPostId}});
+    
+    // if blogPost exists in db
+    if(blogPost){
+        //check if body is empty
+        if(Object.keys(req.body).length === 0){
+            res.status(400).send({ message: "Body is empty" })
+
+        // if not update blogpost
+        } else {
+            await blogPost.update({
+                author: req.body.author, 
+                title: req.body.title, 
+                content: req.body.content, 
+                category: req.body.category
+            })
+            res.json(blogPost); //200 - OK sent automatically
+        }
+    } else {
+        res.status(404).send({ message: "Post does not exist" })
+        }        
 })
+// } catch (error) {
+//     res.status(500).send(error); //Internal server error
 
 // POST - Create a single post - return created post
-blogPostRouter.post('/', async (req, res) => {
-    try {
-        const newPost = await BlogPost.create({author : req.body.author, title: req.body.title, content: req.body.content, category: req.body.category});
-        res.json(newPost); //200 - OK sent automatically
-    } catch (error) {
-        res.status(500).send(error); //Internal server error
-    }
-})
+blogPostRouter.post(
+    '/', 
+    //Middleware function to check if body is empty 
+    (req,res,next) =>{
+        if(Object.keys(req.body).length === 0){
+            res.status(400).send({ message: "Body is empty" })
+        } else {
+            next()
+        }
+    },
+    //Validator function to check if any fields in body are empty
+    [
+        body('author').not().isEmpty().withMessage('Author field is Empty'),
+        body('title').not().isEmpty().withMessage('Title field is Empty'),
+        body('category').not().isEmpty().withMessage('Category field is Empty'),
+        body('content').not().isEmpty().withMessage('Content field is Empty')
+    ],
+    async (req, res) => {
+
+    //Handling errors if validation didnt pass 
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).send(errors);
+          
+    //If no errors, create new post
+        } else{
+            const newPost = await BlogPost.create({
+                author : req.body.author,
+                title: req.body.title, 
+                content: req.body.content, 
+                category: req.body.category
+            })
+            res.json(newPost);
+        }
+    }       
+)
 
 
 // DELETE - Delete a single post - return number of posts deleted (1 or  hopefully)
 blogPostRouter.delete('/:blogPostId', async (req, res) => {
     try {
-        const deletedPost = await BlogPost.destroy({where: {id: req.params.blogPostId}});
+        const deletedPost = await deletedPost.destroy({where: {id: req.params.blogPostId}});
         if(deletedPost) res.json(deletedPost); //200 - OK sent automatically
         else res.status(404).json(deletedPost); //Return 0, and status 404 - not found
     } catch (error) {
