@@ -2,7 +2,7 @@
 import './App.css';
 
 // IMPORTING REACT METHODS
-import {useState, useEffect} from 'react'
+import {useRef,useState, useEffect} from 'react'
 
 //IMPORTING COMPONENTS 
 import Header from './components/Header'
@@ -13,6 +13,7 @@ import Post from "./components/Post"
 // IMPORTING BUTTON PACKAGES 
 import { AwesomeButton } from 'react-awesome-button';
 import 'react-awesome-button/dist/styles.css';
+import { SubHeading } from './globalStyles';
 
 function App() {
 
@@ -120,16 +121,65 @@ async function getPosts() {
   }
 }
 
-// USE EFFECT FOR GET POSTS 
+
+  // const creatingBlogPost = document.querySelector("creatingBlogPost")
+  // const createBlogButton = document.getElementById("create-post")
+  // createBlogButton.addEventListener(()=> {
+  //   creatingBlogPost.classList.remove("creatingBlogPost")
+  //   creatingBlogPost.classList.add(".showCreatingBlogPost")
+  // })
+  
+
+
+// USE EFFECT FOR DISPLAY ALL POSTS 
 useEffect(() => {
    getPosts()
 }, []) 
+  
+
+  
+  
+  
+  // const creatingBlogPost = document.querySelector("creatingBlogPost")
+  // const createBlogButton = document.getElementById("create-post")
+
+  // const ref = useRef(null)
+
+  // useEffect(() => {
+  //   const handleCreateNewPostClick = event => {
+  //     console.log('Testing if clicked')
+  //   }
+
+  //   const element = ref.current
+  //   element.addEventListener('click', handleCreateNewPostClick)
+
+  //   return () => {
+  //     element.removeEventListener('click', handleCreateNewPostClick)
+  //   }
+
+  // },[])
+
+
+  // return (
+  //   <div>
+  //     <button ref = {ref}>Click</button>
+  //   </div>
+  // )
+
+  
+  
+  
+  
+  
+  
+  const [hidden, setHidden] = useState(false)
 
   return (
     <div className="App">
       <header>
         <div className="titleHeader">
-        <Header />
+        <Header setHidden={setHidden} state={hidden}/>
+       
         </div>
         
         
@@ -137,13 +187,30 @@ useEffect(() => {
       
       <main>
     
-        
-        <div className="creatingBlogPost">
+      
+        <div className={hidden ? "creatingBlogPost" : "hidden"}>
           <h2>Creating Blog Post</h2>
+          
             <input onChange={(event) => setAuthor(event.target.value)} placeholder="What's your name?"/> <br /> <br />
             <input onChange={(event) => setTitle(event.target.value)} placeholder="Enter your post title"/> <br /> <br />
             <input onChange={(event) => setContent(event.target.value)} placeholder="Enter your post here"/> <br /> <br />
-            <input onChange={(event) => setCategory(event.target.value)} placeholder="Category"/>
+            {/* Selecti option drop down here */}
+            {/* <input onChange={(event) => setCategory(event.target.value)} placeholder="Category" /> */}
+
+
+            <select name="genres" id="genres"  onChange={(event) => {setCategory(event.target.value); console.log(event.target.value)}}>
+             
+              <option>Blog Genre</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Music">Music</option>
+              <option value="Book">Books</option>
+              <option value="Sport">Sport</option>
+              <option value="Sport">Countryside Lifestyle Livin'</option>
+            
+
+          </select>
+         
+          
 
             <p>{output}</p>
 
@@ -153,13 +220,17 @@ useEffect(() => {
             {/* <button onClick={getPosts}>Get posts!</button> */}
             {/* {getPosts()} */}
         </div>
+       
         
-
+        <SubHeading>Your Blog Posts</SubHeading>
         <div className="displayingBlogPosts">
+         
             {posts.map((data, key) => (
               <div className="individualPost">
                 {/* THIS COMPONENT WILL DISPLAY ALL THE DATA AND A BUTTON FOR COLLAPSING THE CONTENT */}
                 <Post author={data.author} title={data.title} content={data.content} category={data.category} key={key} />
+                {/* <button onClick={deleteBlogPost}>Delete Post!</button> <br /> <br />
+                <button onClick={updateBlogPost}>Update Post!</button> */}
                
             </div>
           ))}
