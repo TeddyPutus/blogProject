@@ -2,6 +2,7 @@
 import './App.css';
 
 // IMPORTING REACT METHODS
+// use ref was a wat to emulate event listeners
 import {useRef,useState, useEffect} from 'react'
 
 //IMPORTING COMPONENTS 
@@ -138,9 +139,7 @@ useEffect(() => {
 }, [changedData]) 
   
 
-  
-  
-  
+
   // const creatingBlogPost = document.querySelector("creatingBlogPost")
   // const createBlogButton = document.getElementById("create-post")
 
@@ -190,18 +189,18 @@ useEffect(() => {
     
       
         <div className={hidden ? "creatingBlogPost" : "hidden"}>
-          <h2>Creating Blog Post</h2>
+          <h2 className="createBlogPostTitle"> ☺︎ Create your Blog Post! ☺︎</h2>
           
-            <input onChange={(event) => setAuthor(event.target.value)} placeholder="What's your name?"/> <br /> <br />
-            <input onChange={(event) => setTitle(event.target.value)} placeholder="Enter your post title"/> <br /> <br />
-            <input onChange={(event) => setContent(event.target.value)} placeholder="Enter your post here"/> <br /> <br />
+            <input className="input" onChange={(event) => setAuthor(event.target.value)} placeholder="What's your name?"/> <br /> <br />
+            <input className="input" onChange={(event) => setTitle(event.target.value)} placeholder="Enter your post title"/> <br /> <br />
+            <input className="input" onChange={(event) => setContent(event.target.value)} placeholder="Enter your post here"/> <br /> <br />
             {/* Selecti option drop down here */}
             {/* <input onChange={(event) => setCategory(event.target.value)} placeholder="Category" /> */}
 
 
-            <select name="genres" id="genres"  onChange={(event) => {setCategory(event.target.value); console.log(event.target.value)}}>
+            <select className="category-dropdown" name="genres" id="genres"  onChange={(event) => {setCategory(event.target.value); console.log(event.target.value)}}>
              
-              <option>Blog Genre</option>
+              <option>Category</option>
               <option value="Lifestyle">Lifestyle</option>
               <option value="Music">Music</option>
               <option value="Book">Books</option>
@@ -215,14 +214,14 @@ useEffect(() => {
 
             <p>{output}</p>
 
-            <button onClick={sendBlogPost}>Post!</button> <br/> <br />
+            <button className="postButton" onClick={sendBlogPost}>Post!</button> <br/> <br />
             {/* <button onClick={deleteBlogPost}>Delete Post!</button> <br /> <br /> */}
             
             {/* <button onClick={getPosts}>Get posts!</button> */}
             {/* {getPosts()} */}
         </div>
        
-        
+        {/* DISPLAYING BLOG POSTS */}
         <SubHeading>Your Blog Posts</SubHeading>
         <div className="displayingBlogPosts">
          

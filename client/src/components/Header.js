@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar"
 export default function Header (props) {
     return (
       <>
-        <HeaderOne><i>Good Lifestyle Keeping</i></HeaderOne>
+        <HeaderOne><i>Lifestyle Local.</i></HeaderOne>
         
        
         <Navbar setHidden={props.setHidden} state={props.state}/> 

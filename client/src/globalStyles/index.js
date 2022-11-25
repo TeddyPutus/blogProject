@@ -35,20 +35,27 @@ export const But = styled.button`
 export const NavButton = styled.button`
     /* display: flex;
     flex-direction: column; */
-    background-color: gold;
-    padding: 15px; 
+    /* background-color: gold;
+    padding: 15px;  */
     /* margin-left: 850px;
     margin-top: 10px;
     margin-bottom: 10px; */
-    font-family:Arial, Helvetica, sans-serif ;
+    /* font-family:Arial, Helvetica, sans-serif ;
     font-size: 20px;
     font-weight: bold;
     font-style: italic;
     color: darkblue;
-    width: fit-content;
+    width: fit-content; */
     /* width: 210px; */
 
+    /* max-width:fit-content; */
+    width: 150px;
     height: auto; 
+    font-size: 20px; 
+    font-family: "Oswald";
+    padding: 15px; 
+    margin: 15px; 
+    margin-bottom: 15px; 
 
 `
 

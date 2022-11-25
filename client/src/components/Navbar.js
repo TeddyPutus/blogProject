@@ -10,11 +10,11 @@ export default function Navbar(props) {
     
   return (
     <nav className="navbar">
-      <NavButton className="glow-on-hover">Log In</NavButton> <br />
-      <NavButton>View All Posts</NavButton> <br /> <br />
+      <NavButton className="glow-on-hover">Log In</NavButton> 
+      <NavButton className="glow-on-hover">View All Posts</NavButton> 
        {/* <AwesomeButton className="nav-button" type="primary" >View All Posts</AwesomeButton> <br /> <br /> <br /> */}
        {/* <AwesomeButton id="create-post" className="nav-button" type="primary" onClick={() => {props.setHidden(!props.state)}}>Create New Post</AwesomeButton> */}
-      <NavButton onClick={() => {props.setHidden(!props.state)}}>Create New Post</NavButton>
+      <NavButton className="glow-on-hover" onClick={() => {props.setHidden(!props.state)}}>Create New Post</NavButton>
     </nav>
   )
 }
