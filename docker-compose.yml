@@ -1,0 +1,13 @@
+services:
+  client:
+    build: /client
+    ports:
+      - 3000:3000
+  server:
+    build: /
+    ports:
+      - 5001:5001
+    volumes:
+      - db:/home/node/db
+volumes:
+  db:

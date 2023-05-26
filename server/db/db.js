@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize')
 const path = require('path')
 
-const db = new Sequelize({
+const db = new Sequelize('database', 'username', 'password',{
     dialect: 'sqlite',
-    storage: path.join(__dirname, 'BlogDB.sqlite'),
+    storage: 'etc/db/BlogDB.sqlite',
     logging: false
 })
 
