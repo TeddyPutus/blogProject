@@ -6,8 +6,8 @@ WORKDIR /app
 COPY package*.json .
 RUN npm ci
 # Copy server folder
-COPY /server .
+COPY . .
 # RUN the application
-CMD ["node", "app.js"]
+CMD ["node", "server/app.js"]
 # Expose port 5001 so backend is accesible
 EXPOSE 5001

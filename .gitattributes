@@ -1,3 +1,6 @@
 Dockerfile text eol=lf
 .dockerignore text eol=lf
 docker-compose.yml text eol=lf
+/client/Dockerfile text eol=lf
+/client/.dockerignore text eol=lf
+/client/docker-compose.yml text eol=lf
