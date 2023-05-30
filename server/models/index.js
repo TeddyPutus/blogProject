@@ -1,3 +1,3 @@
-const BlogPost = require("./BlogPost");
+const BlogPost = require("/app/server/models/blogpost");
 
-module.exports = BlogPost
+module.exports = BlogPost;

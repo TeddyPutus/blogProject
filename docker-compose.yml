@@ -1,10 +1,10 @@
 services:
   client:
-    build: /client
+    build: ./client
     ports:
       - 3000:3000
   server:
-    build: /
+    build: ./
     ports:
       - 5001:5001
     volumes:
