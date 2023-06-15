@@ -1,19 +1,16 @@
-import React from 'react'
-import { HeaderOne, SubHeading } from '../globalStyles'
-import Navbar from "../components/Navbar"
+import React from "react";
+import { HeaderOne, SubHeading } from "../globalStyles";
+import Navbar from "../components/Navbar";
 
-export default function Header (props) {
-    return (
-      <>
-        <HeaderOne><i>Lifestyle Local.</i></HeaderOne>
-        
-       
-        <Navbar setHidden={props.setHidden} state={props.state}/> 
-        {/* <br /> <br /> */}
+export default function Header(props) {
+  return (
+    <>
+      <HeaderOne>Lifestyle Local.</HeaderOne>
 
-        {/* <SubHeading>This is our webpage</SubHeading> */}
+      <Navbar setHidden={props.setHidden} state={props.state} />
+      {/* <br /> <br /> */}
 
-      </>
-    )
-    
+      {/* <SubHeading>This is our webpage</SubHeading> */}
+    </>
+  );
 }

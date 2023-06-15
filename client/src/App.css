@@ -1,7 +1,10 @@
+/*Font imports from GoogleAPI */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 
 .App {
   text-align: center;
-  background-color: #C4D7E0;
+  background-color: ghostwhite;
   margin: 0;
 
   /* TO MAKE THE FOOTER STICKY */
@@ -9,14 +12,17 @@
   width: 100vw;
   display: flex; 
   flex-direction: column;
-  /* 1st part --> start, last part --> end and everythin inbetween spaced evenly */
+  /* 1st part --> start, last part --> end and everythin inbetween spaced evenly  #F8F0F8*/
   /* putting header to very top and footer to very bottom, causing the space */
   justify-content:space-between;
   align-items: center;
+
+  font-family: 'Merriweather Sans', sans-serif;
 }
 
 body {
-  background-color: #C4D7E0;
+  background-color: white; 
+
 }
 
 
@@ -75,15 +81,16 @@ font-family: 'Oswald', sans-serif;
 
 .navbar{
   display: grid; 
-  grid-template-rows:1fr 1fr ;
+  grid-template-columns:1fr 1fr ;
   column-width: 5px;
   margin-left: 900px;
   padding: 30px;
-  /* padding-bottom: 200px; */
-  background-color: #709FB0;
-  /* border-radius: 15px; */
+}
+
+.navbar button{
 
 }
+
 body {
   margin: 0;
 }
@@ -97,45 +104,38 @@ body {
 header {
   display: flex; 
   align-items: flex-start;
-  background-image: 'https://images.unsplash.com/photo-1500989145603-8e7ef71d639e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2376&q=80';
+  background-color: #C4D7E0;
+  position: fixed;
+  height:15vh;
 
+}
+
+main{
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  width: 100vw;
+  height:100%;
+  margin-top:15vh;
+  padding-top:2vh;
 }
 
 .titleHeader {
   display: flex; 
   align-items: flex-start;
+  justify-content: space-between;
+  background-color: #C4D7E0;
+  color: white;
+  text-align: center;
+  padding: 10px; 
+  margin:0;
+  position: sticky;
+  top: 0;
+  width: 100vw;
 }
 
-.titleHeader:hover h1{
-  color:#809A6F ;
-  transform: translateX(70%)
-}
-
-/* GLOW ON HOVER */
-h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
-
-/* OLD STYLYING FOR COMPONENTS  */
-/* .info{
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows:auto ;
-}
-.individual{
-  background-color: cadetblue;
-  padding: 15px; 
-  margin: 15px;
-} */
-
-
-
-/* @keyframes mymove {
-  from {left: 0px;}
-  to {left: 200px;}
-  to {right: 0px;}
-} */
 
 .searchTitle{
-  font-family: "Oswald"; 
+  /* font-family: "Oswald";  */
   font-size: 35px;
   color: green;
 
@@ -171,6 +171,7 @@ h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
 
 .hidden{
   display: none;
+  visibility: hidden;
 }
 
 .showCreatingBlogPost{
@@ -192,13 +193,13 @@ h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
 }
 
 .createBlogPostTitle{
-  font-family: "Oswald";
+  /* font-family: "Oswald"; */
   font-size: 40px;
 }
 
 .postButton{
     font-size: 30px;
-    font-family: "Oswald";
+    /* font-family: "Oswald"; */
     background-color: #6E85B7;
     font-weight: bold;
     color: white;
@@ -207,27 +208,33 @@ h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
     width: 100px;
 }
 
-.deleteButton{
-  font-size: 20px; 
-  font-family: "Oswald";
-  background-color: white;
-  border-radius: 15px;
-  border-color: green;
-  padding: 5px;
-  color: green;
-  height: 3.5vw;
-  font-weight: bold;
+.post-button-box{
+  display: flex;
+  justify-content: space-between;
+}
 
+.post-button-box button{
+  background-color: #6699cc;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.post-button-box button:hover{
+  background-color: #1c73cb;
+  /* font-size: 22px; */
+  font-weight: bolder;
 }
 
 .read-more-button{
-  font-family: "Oswald";
-  font-size: 12px;
-  margin: 10px;
-  color: green;
-  border-radius: 15px;
-  border-color: green;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
 
+.deleteButton{
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 
@@ -238,16 +245,17 @@ h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
   width: 100%;
 }
 
-.individualPost{
+.post{
   /* background-color: cadetblue; */
-  background-color: #94B49F;
+  background-color: white;
+  border-radius: 20px;
+  height: fit-content;
+  width:fit-content;
+  margin:2vh;
+}
+
+.post-image-text-box{
   padding: 15px; 
-  margin: 10px; 
-  border-radius: 5px;
-  /* font-family: "Playfair Display"; */
-  /* width: 300px; */
-
-
 }
 
 .blogImage {
@@ -336,14 +344,116 @@ h1:hover { text-shadow: 0 0 20px rgb(11, 243, 11); }
 
 /* STYLING FOOTER */
 footer {
- 
-  background-color: #709FB0;
+  background-color: #C4D7E0;
   color: white;
   text-align: center;
   padding: 10px; 
   margin:0;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   width: 100vw;
   font-weight: bold;
+}
+
+/* Popup container */
+.popup {
+  position: absolute;
+  height:100vh;
+  width:100vw;
+  background-color: grey;
+  opacity:35%;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popupform {
+  width: fit-content;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10vh;
+  position: absolute;
+  z-index: 1;
+  top:25vh;
+  left: 40vw;
+  margin-left: -80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: lightsteelblue;
+  position: absolute;
+}
+
+.popupform input{
+  font-size: 25px;
+}
+.popup .popupform select{
+  font-size: 25px;
+}
+
+
+/* Popup arrow */
+.popup .popupform::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+.search-sidebar{
+  height:100%;
+}
+
+.search-bar-box{
+  display: flex;
+  margin-bottom:5%;
+}
+
+.category-button-box{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: start;
+  row-gap: 10px;
+  height:100%;
+}
+
+.category-button-box button{
+  width:100%;
+  height:5%;
+  font-size: 25px;
+  background-color: white;
+  border-style: none;
+  border-bottom-style: solid;
+}
+
+.category-button-box button:hover{
+  font-weight: bold;
+  border-bottom-width:5px;
+  border-bottom-color: #C4D7E0;
 }
